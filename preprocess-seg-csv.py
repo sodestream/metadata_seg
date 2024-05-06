@@ -67,7 +67,7 @@ def generate_thread_segmentations(root_node):
         fh = m.header("from")[0] if len(m.header("from")) > 0 else "From field missing"
         tf = m.header("to")[0] if len(m.header("to")) > 0 else "To field missing"
         subj = m.header("subject")[0] if len(m.header("subject")) > 0 else "Subject field missing"
-        thread_nodes_metadata += [(header_message_id(m), fh, tf, m.date_received(), subj)]
+        thread_nodes_metadata += [(header_message_id(m), fh, tf, m.date(), subj)]
         #print(m.header_message_id(), m.uid(), m.uidvalidity())
 
     return thread_segmentations, simple_thread_segmentations, thread_nodes_metadata

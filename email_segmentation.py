@@ -489,6 +489,8 @@ class EmailSegmenter:
 
 def iterate_over_thread(node: Envelope) -> list[Envelope]:
     visited_ids, results, queue = set(), [], [node]
+
+    starting_ml_name = node.mailing_list().name()
     
     while len(queue) > 0:       
         current_node = queue.pop(0)
@@ -501,7 +503,8 @@ def iterate_over_thread(node: Envelope) -> list[Envelope]:
         
         direct_children = current_node.replies()
         for child in direct_children:
-            queue.append(child)
+            if child.mailing_list().name() == starting_ml_name:
+                queue.append(child)
 
     return results
  
