@@ -1,5 +1,5 @@
 from ietfdata.mailarchive2 import *
-from email_segmentation import EmailSegment, SegmentationSerializer
+from .email_segmentation import EmailSegment, SegmentationSerializer
 
 def get_segmentation(m: Envelope, ma: MailArchive) -> list[EmailSegment]:
     # asdsad
@@ -8,7 +8,7 @@ def get_segmentation(m: Envelope, ma: MailArchive) -> list[EmailSegment]:
     
 
 def get_signature(m: Envelope, ma: MailArchive) -> str:
-    segmentation = get_segmentation(m)
+    segmentation = get_segmentation(m, ma)
     return "\n ".join([seg.content for seg in segmentation if seg.type == "signature"])
 
 
