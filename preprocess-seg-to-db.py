@@ -2,10 +2,12 @@ from ietfdata.mailarchive2 import *
 import traceback
 import pickle
 from email_segmentation import SegmentationSerializer, iterate_over_thread, header_message_id
+import json
 
 total_start_time = time.time()
 
-ma = MailArchive(mongodb_username = "admin", mongodb_password = "DzKvurBMsKtAEOQ9s9r")
+jdata = json.load(open("config.json","r"))
+ma = MailArchive(mongodb_username = jdata["mdb_uname"], mongodb_password = jdata["mdb_pass"])
 
 TEST_MODE = False
 

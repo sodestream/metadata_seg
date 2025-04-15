@@ -88,7 +88,10 @@ def copy_if_unchanged(mailing_list_name, old_seg_folder):
     try:
             if not ml:
                 print("For %S there is no data in cache!" % (mailing_list_name))
-            
+
+            meta_old = pd.read_csv(old_seg_folder + "/" + mailing_list_name + "-meta.csv") # this will fail if there is no corresponding csv file in old_seg_folder
+            old_mid_set = set(meta_old["message_id"])
+           
             current_mid_set = set()
             if ml:        
                 mlthreads = ml.threads(this_list_only = True)
@@ -106,17 +109,14 @@ def copy_if_unchanged(mailing_list_name, old_seg_folder):
 
             total_msgs_count = len(current_mid_set)
 
-            meta_old = pd.read_csv(old_seg_folder + "/" + mailing_list_name + "-meta.csv")
-            old_mid_set = set(meta_old["message_id"])
-
             num_diff = len(current_mid_set - old_mid_set) # these are the new messages that are present in current but not present in old
 
             total_msgs_count = len(current_mid_set)
 
-            meta_old = pd.read_csv(old_seg_folder + "/" + mailing_list_name + "-meta.csv")
-            old_mid_set = set(meta_old["message_id"])
+            #meta_old = pd.read_csv(old_seg_folder + "/" + mailing_list_name + "-meta.csv")
+            #old_mid_set = set(meta_old["message_id"])
 
-            num_diff = len(current_mid_set - old_mid_set) # these are the new messages that are present in current but not present in old
+            #num_diff = len(current_mid_set - old_mid_set) # these are the new messages that are present in current but not present in old
             print("Number of differences in messages is %d" % (num_diff))
             
             if num_diff == 0:
