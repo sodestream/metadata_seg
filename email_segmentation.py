@@ -63,7 +63,7 @@ class SegmentationSerializer:
             cont = parsed_seg["content"]
             t = parsed_seg["stype"]
             i = int(parsed_seg["id"])
-            ai = int(parsed_seg["id"]) if parsed_seg["id"].lower() != "none" else None
+            ai = int(parsed_seg["aid"]) if parsed_seg["aid"].lower() != "none" else None
             seg = EmailSegment.from_params(i, cont, t, ai)
             seg_list.append(seg)
 
